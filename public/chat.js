@@ -26,4 +26,5 @@ function outputMessage(message) {
     div.innerHTML = `<p class="nameOfUser">[Codex] :</p>
     <p class="text">${message}</p>`;
     document.querySelector('.chat-messages').appendChild(div)
+    chatForm.reset();
 }
