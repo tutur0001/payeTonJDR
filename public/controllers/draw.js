@@ -1,3 +1,15 @@
+var drawBool = false; 
+
+document.getElementById('draw').addEventListener('click', function() {
+    if (drawBool == true) { 
+        drawBool = false;        
+    }
+    else {
+        drawBool = true;
+    }
+})
+
+
 document.addEventListener("DOMContentLoaded", function() {
     var mouse = { 
        click: false,
@@ -13,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var socket  = io.connect();
  
     // set canvas to full browser width/height
-    canvas.width = width;
+    canvas.width = 0.8 * width;
     canvas.height = height;
  
     // register mouse event handlers
@@ -39,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // main loop, running every 25ms
     function mainLoop() {
        // check if the user is drawing
-       if (mouse.click && mouse.move && mouse.pos_prev) {
+       if (mouse.click && mouse.move && mouse.pos_prev && drawBool == true) {
           // send line to to the server
           socket.emit('draw_line', { line: [ mouse.pos, mouse.pos_prev ] });
           mouse.move = false;
